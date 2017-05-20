@@ -85,4 +85,16 @@
 
 ## 6. Category model
   The Category model should only have a name attribute.
+    - `rails generate migration create_categories`
+    - add name in string and timestamps in the table
 
+## 7. M:M between Post and Category
+  Use "has_many through" to set up a many to many association between Post and Category models.
+    - `rails generate migration create_post_categories`
+    - add two integer ids with timestamps in the table
+
+  Note that you'll need a model backed join table to do this. You'll need to
+    - modify the database schema
+    - set up the associations in the models. Verify via rails console that this worked, 
+      and that you can assign categories to posts, and iterate through a category's posts
+      and vice versa (iterate through a post's categories).
