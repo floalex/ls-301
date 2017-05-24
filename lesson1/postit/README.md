@@ -98,3 +98,22 @@
     - set up the associations in the models. Verify via rails console that this worked, 
       and that you can assign categories to posts, and iterate through a category's posts
       and vice versa (iterate through a post's categories).
+      
+## 8. Add routes for posts
+  Put `resources :posts` in your routes.rb file.
+
+  Go into terminal and type `rake routes` to verify that all 7 routes are created. 
+  Prevent the 'delete' route from being accessed, since we won't have the ability to delete posts in our application.
+
+  You can now also navigate your browser to "localhost:3000/rails/info" to see routing information. 
+  Note that you need to start the rails server first.
+
+## 9. Add PostsController
+  Create a PostsController that can handle the index and show routes.
+  - display all the posts in index. `@posts = Post.all`
+    * create index page view for all the posts. Each post should have title, description,
+      creator name, created at and comments link
+    * add post's categories in the view, it should be above the title
+  - add `show` method in the controller
+    * create individual post view
+  - extract common codes to partials 
