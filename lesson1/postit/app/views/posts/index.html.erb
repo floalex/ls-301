@@ -3,10 +3,6 @@
 <% @posts.each do |post| %>
   <div class="row">
     <div class="span 8 well">
-      <!--<% post.categories.each do |category| %>-->
-      <!--  <span class="badge"><%= category.name %></span>-->
-      <!--<% end %>-->
-      
       <%= render post.categories %>
       <h4><%= link_to post.title, post.url %></h4>
       <p><%= post.description %></p>
