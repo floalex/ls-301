@@ -1,4 +1,4 @@
-<%= render 'shared/content_title', title: 'Add new post' %>
+<%= render 'shared/content_title', title: 'Edit this post' %>
 
 <% if @post.errors.any? %>
   <div class='row'>
@@ -30,6 +30,6 @@
       <%= f.text_area :description, rows: 5 %>
     </div>
     
-    <%= f.submit 'Create post', class: 'btn btn-primary' %>
+    <%= f.submit 'Update post', class: 'btn btn-primary' %>
   <% end %>
 </div>

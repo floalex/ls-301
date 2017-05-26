@@ -19,14 +19,23 @@ class PostsController < ApplicationController
       flash[:notice] = 'New post has been created.'
       redirect_to posts_path
     else
-      render 'new'
+      render :new
     end
   end
   
   def edit
+    @post = Post.find(params[:id])
   end
   
   def update
+    @post = Post.find(params[:id])
+    
+    if @post.update(post_params)
+      flash[:notice] = 'The post has been updated.'
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
   
   private 
