@@ -117,3 +117,8 @@
   - add `show` method in the controller
     * create individual post view
   - extract common codes to partials 
+
+## 10. Complete Post Actions
+  Create all the typical actions for the Post resource (index, show, new, create, edit, update).
+  Use model backed forms. 
+  Add a validation and make sure the validation fires and display on the template.
