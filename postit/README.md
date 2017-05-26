@@ -122,3 +122,8 @@
   Create all the typical actions for the Post resource (index, show, new, create, edit, update).
   Use model backed forms. 
   Add a validation and make sure the validation fires and display on the template.
+  
+  Extract that template to a partial. The partial is actually being used by 4 actions: new, create, edit and update.
+    - keep in mind that view templates' dependencies(mostly, instance variables) must be set up correctly 
+      in all actions that render that template. Be aware of the edge cases.
+    * `new_record` is an ActiveRecord method that we can call and see if the object is new in database

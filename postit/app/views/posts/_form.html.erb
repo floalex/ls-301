@@ -1,0 +1,33 @@
+<% if @post.errors.any? %>
+  <div class='row'>
+    <div class='alert alert-error span8'>
+      <h5>You have the following <%= pluralize(@post.errors.count, 'error') %>: </h5>
+        <ul>
+          <% @post.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+    </div>
+  </div>
+<% end %>
+
+<div class='well'>
+  <%= form_for @post do |f| %>
+    <div class='form-control'>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    
+    <div class='form-control'>
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+    
+    <div class='form-control'>
+      <%= f.label :description %>
+      <%= f.text_area :description, rows: 5 %>
+    </div>
+    
+    <%= f.submit(@post.new_record? ? 'Create post' : 'Update post', class: 'btn btn-primary') %>
+  <% end %>
+</div>
