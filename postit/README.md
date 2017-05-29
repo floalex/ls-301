@@ -127,3 +127,8 @@
     - keep in mind that view templates' dependencies(mostly, instance variables) must be set up correctly 
       in all actions that render that template. Be aware of the edge cases.
     * `new_record` is an ActiveRecord method that we can call and see if the object is new in database
+
+## 11. New Category form
+  Create a new category model-backed form, with validations.
+  You'll need to add a route, create controller/actions and view templates.
+  Extract the post into post partial.
