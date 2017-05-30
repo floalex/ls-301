@@ -1,15 +1,4 @@
-<% if @post.errors.any? %>
-  <div class='row'>
-    <div class='alert alert-error span8'>
-      <h5>You have the following <%= pluralize(@post.errors.count, 'error') %>: </h5>
-        <ul>
-          <% @post.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-    </div>
-  </div>
-<% end %>
+<%= render 'shared/errors', obj: @post %>
 
 <div class='well'>
   <%= form_for @post do |f| %>

@@ -132,3 +132,7 @@
   Create a new category model-backed form, with validations.
   You'll need to add a route, create controller/actions and view templates.
   Extract the post into post partial.
+  
+  Since both the new category and post forms display validation errors, extract that bit of template code 
+  to a partial, so you can reuse that logic
+  * pass the obj object for different objects
