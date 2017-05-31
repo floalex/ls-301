@@ -150,4 +150,6 @@
   
   2. Show Category page
   - After your posts are associated with categories, display the categories that each post is associated with.
-  - When clicking on the category, take the user to the show category page where all the posts associated with that category are displayed
+  - When clicking on the category, take the user to the show category page where all the posts associated with that category
+
+## 14. Use Rails helpers to fix the url format as well as output a more friendly date-time format
