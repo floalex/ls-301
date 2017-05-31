@@ -143,3 +143,11 @@
     - create a newsted model backed form view with validations
     - create a CommentsController#create action, remember to set up parent object
     - render back to the form submitted from when the new comment can't be saved
+
+## 13. Select categories on new/edit post form & Show Category
+  1. On the post form, expose either a combo box or check boxes to allow selection of categories for this post.
+  - Hint: use the category_ids virtual attribute. It will return array format like [1, 2]
+  
+  2. Show Category page
+  - After your posts are associated with categories, display the categories that each post is associated with.
+  - When clicking on the category, take the user to the show category page where all the posts associated with that category are displayed
