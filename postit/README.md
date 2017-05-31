@@ -136,3 +136,10 @@
   Since both the new category and post forms display validation errors, extract that bit of template code 
   to a partial, so you can reuse that logic
   * pass the obj object for different objects
+
+## 12. New comment
+  On the show post page, display a model backed comment creation form.
+    - create a newsted resource to support a nested comment creation url (eg, HTTP POST request to /posts/:post_id/comments)
+    - create a newsted model backed form view with validations
+    - create a CommentsController#create action, remember to set up parent object
+    - render back to the form submitted from when the new comment can't be saved
