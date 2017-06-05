@@ -153,3 +153,21 @@
   - When clicking on the category, take the user to the show category page where all the posts associated with that category
 
 ## 14. Use Rails helpers to fix the url format as well as output a more friendly date-time format
+
+## 15. `has_secure_password` and authentication
+  Set up the User model to use `has_secure_password`. 
+  Note that you'll need to add "gem 'bcrypt-ruby', '~> 3.0.0'" to the Gemfile to play well with the older Rails version
+  Add password digest columns in users table
+  Add `validations: false` on `has_secure_password` so we don't have to confirm the password again
+  
+  Authentication: 
+  - Create the routes manually for the login/out
+  - Create session controller and corresponding views for the login/out feature.
+    * Use non-model backed form as we don't have session model
+  - Make sure to create the appropriate helper methods to selectively hide elements on the template when 
+    logged in/not logged in (eg, the create post form, etc)
+  - use before action to prevent unauthenticated users from accessing certain controller actions (eg, create post action, etc).
+  - assign the creator to the current_user when creating new posts or comments
+  - Fix any data integrity issues in the database, like missing user_id values in the foreign key columns of the posts table
+
+## 16. 
