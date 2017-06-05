@@ -170,4 +170,9 @@
   - assign the creator to the current_user when creating new posts or comments
   - Fix any data integrity issues in the database, like missing user_id values in the foreign key columns of the posts table
 
-## 16. 
+## 16. New user registration
+  - Add resources to users in "routes" for necessary methods
+  - Create users controller for registration
+  - Create a new user form to register new users to your application.
+  - how to automatically log them in after registration?
+    * set the session when saving the user in registration
