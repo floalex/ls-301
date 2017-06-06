@@ -28,15 +28,6 @@
 
 <h5>Comments:</h5>
 
-<% @post.comments.each do |comment| %>
-  <div class="row">
-    <div class="span8 well">
-      <em><%= comment.body %></em>
-      <br/>
-      <span class="quiet">by</span> <%= comment.creator.username %>
-      <% unless comment.body == "" %>
-        <small>at <%= display_datetime(comment.created_at) %></small>
-      <% end %>
-    </div>
-  </div>
+<% @post.reload.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
 <% end %>

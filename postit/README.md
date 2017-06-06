@@ -176,3 +176,13 @@
   - Create a new user form to register new users to your application.
   - how to automatically log them in after registration?
     * set the session when saving the user in registration
+
+## 17. Edit/Show User Profile
+  - add a btn group for users actions in navagiation
+  - create the show and edit user pages
+  - Try to re-use the partials for the comments part
+  - create the tabs for displyaing all the posts, and all the comments in user's profile page
+  - it's different from the comment partial on the show post page and user show page
+    * pass in an additional parameter to the comment partial
+      * turn the parameter on in user's profile page, turn it off in post show page
+  - require same user when edit and update
