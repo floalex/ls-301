@@ -186,3 +186,10 @@
     * pass in an additional parameter to the comment partial
       * turn the parameter on in user's profile page, turn it off in post show page
   - require same user when edit and update
+
+## 18. Polymorphic Vote
+  - Generate migration for votes; Create a polymorphic votes table, along with a polymorphic Vote model
+    * Use boolean to keep track of the up/down vote
+    * Need user id foriegn key to keep track of the creator
+    * votable id and type(polymorphic true)
+  - Create 1:M polymorphic association between Vote/Comment and Vote/Post. Just focus on the model layer right now.
