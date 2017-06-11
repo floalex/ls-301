@@ -3,7 +3,7 @@ class CreateVotes < ActiveRecord::Migration
     create_table :votes do |t|
       t.boolean :vote
       t.integer :user_id
-      t.references :votable, polymorphic: true
+      t.references :voteable, polymorphic: true
       t.timestamps
     end
   end

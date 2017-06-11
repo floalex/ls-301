@@ -195,3 +195,6 @@
   - Create 1:M polymorphic association between Vote/Comment and Vote/Post. Just focus on the model layer right now.
   - Use polymorphic associations to add voting capability to posts(routes, actions, views, etc)
   - Same as for posts, build capability to vote on comments
+  - Prevent voting if user is not authenticated, also don't show the voting arrows if not logged in
+  - Don't allow the same user to vote multiple times on the same comment/post
+    * Add "scope" to the validation
