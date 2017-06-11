@@ -194,3 +194,4 @@
     * votable id and type(polymorphic true)
   - Create 1:M polymorphic association between Vote/Comment and Vote/Post. Just focus on the model layer right now.
   - Use polymorphic associations to add voting capability to posts(routes, actions, views, etc)
+  - Same as for posts, build capability to vote on comments
