@@ -20,7 +20,8 @@
 4. Then "heroku create" to create this app on heroku. This command also adds a "heroku" remote repository that you can push to.
 5. To deploy, issue "git push heroku master".
 6. You may need to run migrations on heroku afterwards, with "heroku run rake db:migrate".
-7. Other helpful heroku commands:
+7. Run `heroku restart` to restart the app after you migrate 
+8. Other helpful heroku commands:
   - heroku logs
   - heroku logs -t
   - heroku rename
