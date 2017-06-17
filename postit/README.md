@@ -199,3 +199,11 @@
   - Prevent voting if user is not authenticated, also don't show the voting arrows if not logged in
   - Don't allow the same user to vote multiple times on the same comment/post
     * Add "scope" to the validation
+
+## 19. Add Ajax to voting
+  - Rails' built-in functionality for SJR (server-generated javascript response). 
+  - This is in contrast to UJS (unobtrusive javascript we saw in the Ruby course).
+
+## 20. Add slugs to Post
+  - Use the Post's title attribute to generate a new column called slug, which will be a 
+    unique, SEO friendly identifier we can use in URLs.

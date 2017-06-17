@@ -39,16 +39,32 @@ class PostsController < ApplicationController
   end
   
   def vote
-    vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    # use instance availalte for vote to carry through to the view template
+    @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
     
-    # since we dont use form to submit vote, so use valid instead of save here
-    if vote.valid?
-      flash[:notice] = "Your vote is counted."
-    else
-      flash[:error] = "You can only vote once on this post."
+    respond_to do |format| 
+      format.html do 
+        # since we dont use form to submit vote, so use valid instead of save here
+        if @vote.valid?
+          flash[:notice] = "Your vote is counted."
+        else
+          flash[:error] = "You can only vote once on this post."
+        end
+        
+        redirect_to :back
+      end
+      # for laert box
+      # format.js # will render the js file in views template
+      
+      # for flash message
+      format.js do 
+        if @vote.valid?
+          flash.now[:notice] = "Your vote is counted."
+        else
+          flash.now[:error] = "You can only vote once on this post."
+        end
+      end
     end
-    
-    redirect_to :back
   end
   
   private 
