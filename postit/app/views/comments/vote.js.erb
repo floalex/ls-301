@@ -1,0 +1,10 @@
+<!--with alert box-->
+<!--<% if @comment.valid? %>-->
+<!--  $("#comment_<%= @comment.id %>_votes").html("<%= @comment.total_votes %> votes")-->
+<!--<% else %>-->
+<!--  alert("You can't vote twice!")-->
+<!--<% end %>-->
+
+<!--with flash div-->
+$("#comment_<%= @comment.id %>_votes").html("<%= @comment.total_votes %> votes")
+<%= ajax_flash("#message_div") %>

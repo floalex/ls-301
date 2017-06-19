@@ -53,7 +53,7 @@ class PostsController < ApplicationController
         
         redirect_to :back
       end
-      # for laert box
+      # for js alert box
       # format.js # will render the js file in views template
       
       # for flash message
@@ -74,6 +74,6 @@ class PostsController < ApplicationController
     end
     
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find_by(slug: params[:id])
     end
 end

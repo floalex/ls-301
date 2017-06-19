@@ -206,4 +206,9 @@
 
 ## 20. Add slugs to Post
   - Use the Post's title attribute to generate a new column called slug, which will be a 
-    unique, SEO friendly identifier we can use in URLs.
+    unique, SEO friendly identifier we can use in URLs, and can hide database data.
+  - Difference between `before_create` and `before_save`
+    * `before_create`: Only save it once in ActiveRecord
+    * `before_save`: save the changes every time we change the attribute
+  - After adding the new `slug` attribute in ActiveRecord, need to go to console to "save" all the objects again
+    * like this: `Post.all.each { |post| post.save }`

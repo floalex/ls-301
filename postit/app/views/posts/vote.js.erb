@@ -1,10 +1,10 @@
 <!--with alert box-->
 <!--<% if @vote.valid? %>-->
-<!--  $("#post_<%= @post.id %>_votes").html("<%= @post.total_votes %> votes")-->
+<!--  $("#post_<%= @post.slug %>_votes").html("<%= @post.total_votes %> votes")-->
 <!--<% else %>-->
 <!--  alert("You can't vote twice!")-->
 <!--<% end %>-->
 
 <!--with flash div-->
-$("#post_<%= @post.id %>_votes").html("<%= @post.total_votes %> votes")
+$("#post_<%= @post.slug %>_votes").html("<%= @post.total_votes %> votes")
 <%= ajax_flash("#message_div") %>
