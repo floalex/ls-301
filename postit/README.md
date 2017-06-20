@@ -212,3 +212,4 @@
     * `before_save`: save the changes every time we change the attribute
   - After adding the new `slug` attribute in ActiveRecord, need to go to console to "save" all the objects again
     * like this: `Post.all.each { |post| post.save }`
+  - Add similar slugs to User and Category
