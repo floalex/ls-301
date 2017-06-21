@@ -213,3 +213,8 @@
   - After adding the new `slug` attribute in ActiveRecord, need to go to console to "save" all the objects again
     * like this: `Post.all.each { |post| post.save }`
   - Add similar slugs to User and Category
+  - Make our slugging code more robust
+    * Use regex to handle characters that are not letters or numbers
+    * When have duplicate slugs, loop through them and make each one unique 
+    * To make each slug unique, append a number(suffix) for the duplicate slugs
+      - If the slug already has suffix, make sure don't append more suffix
