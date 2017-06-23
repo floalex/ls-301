@@ -218,3 +218,9 @@
     * When have duplicate slugs, loop through them and make each one unique 
     * To make each slug unique, append a number(suffix) for the duplicate slugs
       - If the slug already has suffix, make sure don't append more suffix
+
+## 21. Use module
+  - Extract the common votes related code from the models into a module that you can mixin.
+  - Let Rails auto load the module by adding `config.autoload_paths += %W(#{config.root}/lib)` in "config/application.rb"
+  - Using `ActiveSupport::Concern` can write cleaner code, at the core it is using metaprograming
+
