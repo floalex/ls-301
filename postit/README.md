@@ -223,4 +223,7 @@
   - Extract the common votes related code from the models into a module that you can mixin.
   - Let Rails auto load the module by adding `config.autoload_paths += %W(#{config.root}/lib)` in "config/application.rb"
   - Using `ActiveSupport::Concern` can write cleaner code, at the core it is using metaprograming
+  
+  - For sluggable module: require a little meta-programming, more difficult
+    - Since the column name for difference classes are not the same, need to call a method to set the parameter: sluggable_column
 
