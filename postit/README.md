@@ -234,4 +234,11 @@
     * `gem push newcreatefile.gem` to rubygem.org
   
 * Warning: Make sure the file name, gem name and the `include xxx` in model need to be all matched to make the gem works in the app
+  - If don't put "voteable" in front of the file and gem name, Rails couldn't find it in the app
+
+##22. Simple Admin
+  - Build a simple admin role so that only admins can create new categories.
+    * Add the authorization roles logic to the User model
+    * Modify the users table to add the roles
+    * Extract the aceess deny common codes to one method in controller
 
