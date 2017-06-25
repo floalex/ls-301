@@ -226,4 +226,12 @@
   
   - For sluggable module: require a little meta-programming, more difficult
     - Since the column name for difference classes are not the same, need to call a method to set the parameter: sluggable_column
+    
+  - Extract the common codes into gem
+    * Create a new folder for the gem
+    * put the logic under lib
+    * use `gem build filename.gemspec`
+    * `gem push newcreatefile.gem` to rubygem.org
+  
+* Warning: Make sure the file name, gem name and the `include xxx` in model need to be all matched to make the gem works in the app
 
