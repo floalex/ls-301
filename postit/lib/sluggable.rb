@@ -11,13 +11,13 @@ module Sluggable
   end
   
   def generate_slug!
-    the_slug = to_slug(self.send(self.class.slug_column.to_sym))
+    the_slug = to_slug(self.send(self.class.slug_column.to_sym)) #calling self.title/username/name
     obj = self.class.find_by(slug: the_slug) #self.class will be the model that includes the module
     count = 2
     # Make sure the obj exists and the obj objects are not the same
     while obj && obj != self
       the_slug = append_suffix(the_slug, count)
-      # loop will stop with this condition
+      # loop will stop with this condition as the obj will be nil with the new the_slug
       obj = self.class.find_by(slug: the_slug)
       count += 1
     end
