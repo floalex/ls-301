@@ -4,6 +4,10 @@ module ApplicationHelper
   end
   
   def display_datetime(time)
+    if logged_in? && !current_user.time_zone.blank?
+      time = time.in_time_zone(current_user.time_zone)
+    end
+    
     time.strftime("%m/%d/%y %I:%M%P %Z") #month/day/year 10:30PM timezone
   end
   

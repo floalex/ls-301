@@ -246,3 +246,9 @@
 
 ##23. Time Zones
   - create a new column to allow users to display all times in the application in the user specified time zone.
+    1. Set/overwrite the default time zone in "application.rb"
+      - `rake time:zones:all | grep US` will display all the US time zone in terminal
+    2. Add time zone column to the users table, the type is gonna be "string"
+    3. Add the time zone field in the user's form in user view, user drop down feature, set the default time zone to eastern
+      * Make sure the whitelist the time zone field in users controller
+    4. Use `in_time_zone` to update the time in helper method 
