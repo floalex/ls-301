@@ -252,3 +252,85 @@
     3. Add the time zone field in the user's form in user view, user drop down feature, set the default time zone to eastern
       * Make sure the whitelist the time zone field in users controller
     4. Use `in_time_zone` to update the time in helper method 
+
+##24. Two factor auth with Twilio(optional)
+  Thinking process:
+  1. phone column and pin column
+  2. Change login logic
+    a. After succesful login, is phone number present?
+      i. no -> normal login
+      ii. yes
+        1. generate a pin number(save to db, do not show user)
+        2. send it off to Twilio to sms to phone
+        3. show a form to enter the pin
+  
+  Actual Steps:
+  1. `rails generate migration add_two_factor_columns`
+  2. Add the form field for phone:
+    ```
+    <%= f.label :phone, "Phone Number <small>(numbers only)</small>".html_safe %>
+    <%= f.text_field :phone, maxlength: 9 %>
+    <%= link_to '#', id: 'two_factor_phont' do %>
+      <i class='icon-question-sign'></i>
+    <% end %>
+    ```
+  3. Add phone number in users_params in the users controller
+  4. In session controller, add the codes below in the "create method" after user.authenticate:
+    ```
+    if user.twofactor_auth?
+      session[:two_factor] = true
+      user.generate_pin!
+      user.send_pin_to_twilio
+      redirect_to pin_path
+    else
+    end
+    ```
+    
+    Also add the `pin` method in the session controller:
+    ```
+    def pin
+      access_denied if session[:two_factor].nil?
+      
+      if request.post?
+        user = User.find_by(pin: params[:pin])
+        if user
+          user.remove_pin!
+          login_users!(user)
+        else
+          flash[:error] = "Sorry something went wrong"
+          redirect_to pin_path
+        end
+      end
+    ```
+  5. Add the `two_factor_auth?`, `generate_pin!` in user model:
+    ```
+    def two_factor_auth?
+      !self.phone.blank?
+    end
+    
+    def generate_pin!
+      self.update_column(:pin, rand(10 ** 6)) # random 6 digit number
+    end
+    
+    def remove_pin!
+    self.update_column(:pin, nil)
+    end
+    
+    def send_pin_to_twilio
+      # copy the codes from Twilio website
+    end
+    ```
+  6. Add the necessary routes in route file
+    ```
+    get '/pin', to: 'sessions#pin'
+    post '/pin', to: 'sessions#pin'
+    ```
+  7. Add the pin template in session view
+  8. Install Twilio in the app and require the file
+
+##25. Pagination
+  - Set PER_PAGE setting
+  - Change the code in Posts index method
+  - pages? - (num of all posts) / (posts per page)
+  - page 1 -> offset: 0, shows: 1-3
+  - page 2 -> offset: 3, shows: 4-6

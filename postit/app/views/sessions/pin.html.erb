@@ -1,0 +1,14 @@
+<%= render 'shared/shared_content', title: "Ender Your Pin to Log in" %>
+<p>
+  You will receive a text message with a pin number.
+  Once you submit the pin number, you can proceed with login.
+</p>
+<div class="well">
+  <%= form_tag '/pin' do %>
+    <div class="control-group">
+      <%= label_tag :pin, "Pin Number" %>
+      <%= text_field_tag :pin, params[:pin] || '' %>
+    </div>
+    <%= submit_tag "Unlock Your Account", class: 'btn btn-success' %>
+  <% end %>
+</div>

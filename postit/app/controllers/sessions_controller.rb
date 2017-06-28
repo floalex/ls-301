@@ -7,9 +7,7 @@ class SessionsController < ApplicationController
     user = User.where(username: params[:username]).first   # can also use user = User.find_by(username: params[:username])
     
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:notice] = "Welcome, you have logged in."
-      redirect_to root_path
+      login_users!(user)
     else
       flash[:error] = "There is something wrong with your username or password."
       redirect_to login_path
@@ -24,4 +22,13 @@ class SessionsController < ApplicationController
     flash[:notice] = "You've logged out."
     redirect_to root_path
   end
+  
+  private 
+    
+    def login_users!(user)
+      session[:user_id] = user.id
+      flash[:notice] = "Welcome, you have logged in."
+      redirect_to root_path
+    end
+    
 end
