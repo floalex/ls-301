@@ -6,11 +6,32 @@
 <% end %>
 
 <div class="row">
-  <% @pages.times do |n| %>
-    <% if (params[:offset].nil? && n == 0) || params[:offset].to_s == (n * Post::PER_PAGE).to_s %>
-      <%= "| Page #{n+1}" %>
-    <% else %>
-      <%= link_to "| Page #{n+1}", posts_path(offset: n * Post::PER_PAGE) %>
+  <% current_page = 0 %>
+  
+  <span class="pages-section">
+    <% @pages.times do |n| %>
+      <% if (params[:offset].nil? && n == 0) || params[:offset].to_s == (n * Post::PER_PAGE).to_s %>
+        <%= "| Page #{n+1}" %>
+        <% current_page = n %>
+      <% else %>
+        <%= link_to "| Page #{n+1}", posts_path(offset: n * Post::PER_PAGE) %>
+      <% end %>
     <% end %>
+  </span>
+  
+  <% if current_page + 1 > 1 %>
+    <span class="prev-button">
+      <%= link_to "| < prev", posts_path(offset: (current_page - 1) * Post::PER_PAGE) %>
+    </span>
+  <% end %>
+  
+  <% if current_page + 1 < @pages %>
+    <span class="next-button">
+      <%= link_to "| next >", posts_path(offset: (current_page + 1) * Post::PER_PAGE) %>
+    </span>
   <% end %>
 </div>
+
+<script>
+  $(".pages-section").before($(".prev-button"));
+</script>

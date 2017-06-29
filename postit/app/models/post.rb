@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  PER_PAGE = 5
+  PER_PAGE = 3
   
   include VoteableFlo
   include Sluggable
