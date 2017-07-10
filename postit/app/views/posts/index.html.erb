@@ -21,7 +21,7 @@
   
   <% if current_page + 1 > 1 %>
     <span class="prev-button">
-      <%= link_to "| < prev", posts_path(offset: (current_page - 1) * Post::PER_PAGE) %>
+      <%= link_to " < prev", posts_path(offset: (current_page - 1) * Post::PER_PAGE) %>
     </span>
   <% end %>
   

@@ -1,3 +1,5 @@
+Live Code: https://flo-postit-app.herokuapp.com/
+
 == Getting Started
 
 1. Make sure you have rails version 4. Type "rails -v" to make sure.
@@ -334,3 +336,7 @@
   - pages? - (num of all posts) / (posts per page)
   - page 1 -> offset: 0, shows: 1-3
   - page 2 -> offset: 3, shows: 4-6
+
+##26. Deploy to Heroku
+  - Since Heroku needs updated Ruby version to run, need to update Rails version to 4.2 
+  - Otherwise, there will be ActiveRecord error for time zone

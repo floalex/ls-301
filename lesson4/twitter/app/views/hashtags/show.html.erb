@@ -1,0 +1,6 @@
+<%= render 'shared/header', header: "Statuses for hashtag ##{params[:id]}"%>
+<ul>
+  <% @statuses.each do |status| %>
+    <li><%= render 'statuses/status', status: status %></li>
+  <% end %>
+</ul>
