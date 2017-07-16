@@ -1,7 +1,7 @@
-##1. Rails is fragile
+## 1. Rails is fragile
   - Follow convention and understand the basics will be fine
 
-##2. Show Post
+## 2. Show Post
   - Find the particular post through id/slug param to show the post
     * non Rails way
     * to show post:
@@ -31,6 +31,5 @@
     * execute a list of validations
     * sets "errors" if there are any validations 
     * return whether errors empty
-  
-## Final Clean up
+
   

@@ -1,4 +1,4 @@
-##1. Rails Summary
+## 1. Rails Summary
   - index: A technique that makes querying data a lot faster
   - no-sequal: document database in Mongo has key value pairs in giant hash
 
@@ -7,7 +7,7 @@
   
   - For non-model backed form, `redirect_to` for else becuase no object
 
-##2. Followers/Followings
+## 2. Followers/Followings
   - Relationships: `follower_id` and `leader_id`
   - Pick good names when defining the relationships for have_many association
   
@@ -22,7 +22,7 @@
       * Iterate through `current_user.following_user`, then append `user.statuses.all` to the `@statuses`
       * Iterate through all the statuses with `status.body` in the view
 
-##3. Modeling @mentions
+## 3. Modeling @mentions
   1. Create mentions route and the method in users controller
   2. Create mentions table: need `user_id` and `status_id`
   3. Create the mention model
@@ -35,7 +35,7 @@
       - If mention size > 0, iterate through all the mentions 
       - find the user in the iteration, icreate mention if username exists
 
-##4. Display unread mentions
+## 4. Display unread mentions
   1. Create migration: `add_column :mentions, :viewed_at, :datetime`
   2. Define the relationship in user model, use SQL syntax `viewed_at: NULL` to only querying the mentions not viwed yet.
   3. Show `num_unread_mentions` in the view
@@ -47,7 +47,7 @@ Difference between integration and unit test:
 - integration: high level of the app
 - unit: test for a particular method
 
-##5. Twitter Boostrap, asset pipeline and Heroku
+## 5. Twitter Boostrap, asset pipeline and Heroku
   - Boostrap: Give deveopers front end tools includeing HTML, CSS and jQuery to build the app without worrying UI
     * Be able to convert the pure HTML code to Ruby code in erb file
     * Use bootstrap-sass gem since
@@ -64,7 +64,7 @@ Difference between integration and unit test:
     * Need to run migration after pushing to Heroku: `heroku run rake db:migrate`
     * Restart Heroku: `heroku restart`
   
-##6. Hashtags and retweets
+## 6. Hashtags and retweets
   1. Create resources for hashtag
   2. Create hashtag controller for show
     - Use SQL to querying all the hashes
