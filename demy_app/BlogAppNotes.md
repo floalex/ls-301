@@ -181,3 +181,17 @@ defining a route, action, and view to serve the new post form to the client:
 2. Find, Show, Edit, Delete a Post
   Since we changed the type of objects that are passed into the view as posts. Before they were Hash objects, 
   and now they're Post objects, and accessing its attributes is now easier.
+
+## 11. Expanded Encapsulation Through Our Models
+1. Update a Record
+  - The way to tell if a record is a new record or not is to check its id column 
+    - if it's `nil` it's a new record
+    - adjust model code to either INSERT or UPDATE records based on whether the post is a new or existing one
+    - need to implement the `set_attributes`
+
+2. Delete a Post Model
+
+3. List Posts
+  (1) define a class method in the Post class that executes the SQL command to return all the posts in a hash
+  (2) then we'll use map to create an array of Post objects
+  (3) use our Post model methods in the view
