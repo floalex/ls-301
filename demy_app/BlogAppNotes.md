@@ -190,8 +190,26 @@ defining a route, action, and view to serve the new post form to the client:
     - need to implement the `set_attributes`
 
 2. Delete a Post Model
+  - Implement `destroy` method in the class
 
 3. List Posts
   (1) define a class method in the Post class that executes the SQL command to return all the posts in a hash
   (2) then we'll use map to create an array of Post objects
   (3) use our Post model methods in the view
+
+## 12. Model Validations
+1. Model Validation
+  - whenever an application allows user's input, we want to validate the data as early as possible
+  - Rails provides `present?` method for validation
+  - Use guard clause before saving the data
+
+2. Integrate Validations With Forms
+  when the user provides invalid inputs, we want to:
+  (1) "bounce back" to the page with the input form instead of taking to new page
+  (2) preserve the user's input so they don't have to fill the form from scratch
+  (3) show the user what input field(s) are not valid
+  * When you reload a page with a browser, it asks the browser to replay the ast HTTP request. 
+  * In the case of a form submission with errors, the last request will be a POST request because 
+    the behavior on the server side is to render the form and not redirect to another path.
+
+3. Display Validations

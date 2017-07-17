@@ -1,5 +1,15 @@
 <html>
   <body>
+    <div class="errors">
+      <% if post.errors.any? %>
+        <% post.errors.each do |attr, error| %>
+          <p class="error" style="color:orange" %>
+            <%= attr %> : <%= error %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+    
     <form method="post" action="/update_post/<%= post.id %>">
       <label>Title</label>
       <input id="title" name="title" type="text" value="<%= post.title %>" />

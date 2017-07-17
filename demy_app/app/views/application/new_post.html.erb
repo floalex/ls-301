@@ -1,16 +1,26 @@
 <html>
   <body>
+    <div class="errors">
+      <% if post.errors.any? %>
+        <% post.errors.each do |attr, error| %>
+          <p class="error" style="color:orange" %>
+            <%= attr %> : <%= error %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+    
     <form method="post" action="/create_post">
       <label>Title</label>
-      <input id="title" name="title" type="text" />
+      <input id="title" name="title" type="text" value="<%= post.title %>" />
       <br /> <br />
       
       <label>Body</label>
-      <textarea id="body" name="body" rows="4"></textarea>
+      <textarea id="body" name="body" rows="4"><%= post.body %></textarea>
       <br /> <br />
       
       <label>Author</label>
-      <input id="author" name="author" type="text" />
+      <input id="author" name="author" type="text" value="<%= post.author %>" />
       <br /> <br />
       
       <input type="submit" value="Create Post" />
