@@ -160,4 +160,24 @@ defining a route, action, and view to serve the new post form to the client:
 
 ## 9. Controller Patterns and CRUD
 1. Controller Patterns in a Datacentric App
-  
+  our controller doing the following two things:
+  (1) Interacting with the database, either read data from the database (with a SELECT SQL statement)
+      or rite data to the database (with INSERT, UPDATE or DELETE SQL statements)
+  (2) Use the retrieved data to render a view template (in case a "read"), 
+      or redirect to a different page (in case of a "write")
+  The controller stands between the data (in the database) and the presentation (the view templates) to coordinate the flow.
+
+2. CRUD represents four basic actions to interact with data. 
+  The four resource actions here map directly to SQL's four core commands: INSERT, SELECT, UPDATE and DELETE
+
+## 10. Data Encapsulation With Models
+1. Creating a New Post
+  - encapsulation: move all SQL commands about a piece of data into a single place(class), so they can be easily updated
+  - Define the `Post` class with the attributes then move the codes to the class 
+    * wrap the database access steps in a `save` method
+    * The logic in the controller action is much simpler - just going to instantiate a post object from the params, 
+      which has all of the user's inputs, and tell the post object to save itself into the database.
+
+2. Find, Show, Edit, Delete a Post
+  Since we changed the type of objects that are passed into the view as posts. Before they were Hash objects, 
+  and now they're Post objects, and accessing its attributes is now easier.
