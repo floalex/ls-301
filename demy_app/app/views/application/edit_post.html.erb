@@ -1,0 +1,24 @@
+<html>
+  <body>
+    <form method="post" action="/update_post/<%= post['id'] %>">
+      <label>Title</label>
+      <input id="title" name="title" type="text" value="<%= post['title'] %>" />
+      <br /> <br />
+      
+      <label>Body</label>
+      <textarea id="body" name="body" rows="4"><%= post['body'] %></textarea>
+      <br /> <br />
+      
+      <label>Author</label>
+      <input id="author" name="author" type="text" value="<%= post['author'] %>" />
+      <br /> <br />
+      
+      <input type="submit" value="Update Post" />
+    </form>
+    
+    <br />
+    
+    <!-- link back to the list of post -->
+    <a href="/list_posts">Back to Posts</a>
+  </body>
+</html>
