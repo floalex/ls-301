@@ -213,3 +213,17 @@ defining a route, action, and view to serve the new post form to the client:
     the behavior on the server side is to render the form and not redirect to another path.
 
 3. Display Validations
+  - Add `errors` attribute in the post object
+  - Iterate through the errors hash in the view if any exists
+
+## 13. A Second Resource
+1. Adding Comments to Our App
+  (1) create a new table (define a structure): some SQL to create the table
+  (2) populate that table with rows (place data in that structure)
+
+2. Displaying Comments
+  (1) collect the comments from the DB for a post inside the controller action and pass them to the view
+  (2) display the comments in the view
+
+3. Comment model
+- The file app/models/comment.rb contains an `initialize` and `new_record?` method similar to those found in Post.

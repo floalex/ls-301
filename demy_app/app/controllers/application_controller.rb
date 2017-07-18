@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   
   def show_post
     post = Post.find(params['id'])
-    render 'application/show_post', locals: { post: post }
+    comments = Post.connection.execute("SELECT * FROM comments WHERE comments.post_id = ?", params['id'])
+    render 'application/show_post', locals: { post: post, comments: comments }
   end
   
   def new_post
