@@ -222,8 +222,32 @@ defining a route, action, and view to serve the new post form to the client:
   (2) populate that table with rows (place data in that structure)
 
 2. Displaying Comments
-  (1) collect the comments from the DB for a post inside the controller action and pass them to the view
+  (1) get collection of comments associated with the post from the DB inside the controller action and pass them to the view
   (2) display the comments in the view
 
 3. Comment model
 - The file app/models/comment.rb contains an `initialize` and `new_record?` method similar to those found in Post.
+
+## 14. Working With Model Associations
+1. Association Between Models
+  - not the ideal solution by executing SQL statement in the controller as the SQL command needs 
+    a post id to find the comments: Better to move it to the Post model
+
+2. Creation Through Association
+  - creating a comment will very much resemble creating a post
+  - The primary difference in creating a comment is our concern for post_id. 
+  - When creating a comment, we'll need to be sure to associate it with the right post.
+  - 3 steps:
+    (1) point the <form> action to a path that includes post.id:
+        `<form method="post" action="/create_comment_for_post/<%= post.id %>">`
+    (2) capture this post_id in the route:
+        `post '/create_comment_for_post/:post_id' => 'application#create_comment'`
+    (3) make sure to set the post_id for the row in the comments table:
+        ```
+        connection.execute insert_comment_query,
+          params['body'],
+          params['author'],
+          params['post_id'],
+          Date.current.to_s
+        ```
+  - At the end of `create_comment`, we just redirect back to show_post

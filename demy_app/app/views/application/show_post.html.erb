@@ -20,17 +20,33 @@
       <div class="comments">
         <h3>Comments:</h3>
         <hr />
-        <% comments.each_with_index do |comment, index| %>
+        <% post.comments.each_with_index do |comment, index| %>
           <div class="comment">
             <small class="comment_meta">
-              <span class="comment_author">#<%= index + 1 %> by <%= comment['author'] %>-</span>
-              <em class="comment_created_at"><%= comment['created_at'] %></em>
+              <span class="comment_author">#<%= index + 1 %> by <%= comment.author %>-</span>
+              <em class="comment_created_at"><%= comment.created_at %></em>
             </small>
-            <p class="comment_body"><%= comment['body'] %></p>
+            <p class="comment_body"><%= comment.body %></p>
           </div>
           <hr />
         <% end %>
+        
+        <!-- new comment form -->
+        <h3>New Comment</h3>
+        <form method="post" action="/create_comment_for_post/<%= post.id %>">
+          <label>Comment</label>
+          <textarea id="body" name="body" rows="4"></textarea>
+          <br /> <br />
+          
+          <label>Name</label>
+          <input id="author" name="author" type="text" />
+          <br /> <br />
+          
+          <input type="submit" value="Create Comment" />
+        </form>
+        <hr />
       </div>
+      
     </div>
     
     <br />

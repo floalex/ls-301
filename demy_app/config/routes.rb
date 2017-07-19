@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   post '/update_post/:id' => 'application#update_post'
   
   post '/delete_post/:id' => 'application#delete_post'
+  
+  post '/create_comment_for_post/:post_id' => 'application#create_comment'
 end
