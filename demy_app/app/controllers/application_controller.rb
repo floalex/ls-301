@@ -12,8 +12,10 @@ class ApplicationController < ActionController::Base
   
   def show_post
     post = Post.find(params['id'])
+    comment = Comment.new
+    comments = post.comments
   
-    render 'application/show_post', locals: { post: post }
+    render 'application/show_post', locals: { post: post, comment: comment, comments: comments }
   end
   
   def new_post
@@ -62,8 +64,29 @@ class ApplicationController < ActionController::Base
   
   def create_comment
     post = Post.find(params['post_id'])
-    post.create_comment('body' => params['body'], 'author' => params['author'])
+    comments = post.comments
+    # post.build_comment to set the post_id
+    comment = post.build_comment('body' => params['body'], 'author' => params['author'])
+    
+    if comment.save
+      redirect_to "/show_post/#{params['post_id']}"
+    else
+      render 'application/show_post', locals: {post: post, comment: comment, comments: comments}
+    end
+  end
+  
+  def delete_comment
+    # post = Post.find(params['post_id'])
+    comment = Comment.find(params['comment_id'])
+    comment.destroy
+    
     redirect_to "/show_post/#{params['post_id']}"
+  end
+  
+  def list_comments
+    comments = Comment.all
+    
+    render 'application/list_comments', locals: {comments: comments}
   end
 
 end

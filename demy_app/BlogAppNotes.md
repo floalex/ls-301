@@ -251,3 +251,25 @@ defining a route, action, and view to serve the new post form to the client:
           Date.current.to_s
         ```
   - At the end of `create_comment`, we just redirect back to show_post
+
+## 15. Cleaning up
+1. Validation for Creating a Comment
+  (1) The body and author field both have to be present.
+  (2) If validation fails, we want the user to stay on the previous create comment page with the 
+      fields of the comment form populated.
+      - Note that the create comment page is actually our show_post page, we want to show the 
+        comment errors message on that page. We need to call `comment.errors` there. Therefore
+        in `show_post` method in controller, we need to instantiate an empty comment object there.
+
+2. Delete a Comment
+  1. set up the route 
+  2. add in a form that allows us delete a comment from a Post in the show_post view
+  3. controller action for deleting a comment, remember to redirect the user to the same page
+  4. Comment model and find the comment id then delete
+
+3. List Comments
+  1. start with the view template: "list_comments.html.erb "
+  2. set up `list_comments` route
+  3. controller action for the `list_comments` to get all the comments
+    * Note, that in our view, list_comments.html.erb we are using the method `comment.post`.
+      Define the method in the Comment model.
