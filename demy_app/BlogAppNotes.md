@@ -273,3 +273,13 @@ defining a route, action, and view to serve the new post form to the client:
   3. controller action for the `list_comments` to get all the comments
     * Note, that in our view, list_comments.html.erb we are using the method `comment.post`.
       Define the method in the Comment model.
+
+## 16. A Base Model
+- Inheriting From a Base Model
+  - pull the common methods in the models like `new_record?` and place them inside a `BaseModel`
+  - let Post and Comment inherit from BaseModel
+  - We can omit the classes and call new all by itself
+    * if we call new inside of this class method, it will be called on the class it lives in
+    * give our classes a .table_name method to figure out the appropriate table name string
+    * inside of a class method self is the class
+  - This process of having an object look at itself is called **introspection**. 

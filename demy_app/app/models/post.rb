@@ -1,4 +1,5 @@
-class Post
+class Post < BaseModel
+
   attr_reader :id, :title, :body, :author, :created_at, :errors
   
   def initialize(attributes={})
@@ -19,32 +20,6 @@ class Post
     @errors['body'] = "Can't be blank" if body.blank?
     @errors['author'] = "Can't be blank" if author.blank?
     @errors.empty?
-  end
-  
-  def self.all
-    post_hashes = connection.execute("SELECT * FROM posts")
-    post_hashes.map do |hash|
-      Post.new(hash)
-    end
-  end
-  
-  def self.find(id)
-    post_hash = connection.execute("SELECT * FROM posts WHERE posts.id = ? LIMIT 1", id).first
-    Post.new(post_hash)
-  end
-  
-  def new_record?
-    @id.nil?
-  end
-  
-  def save
-    return false unless valid?
-    
-    if new_record?
-      insert
-    else
-      update
-    end
   end
   
   def insert
@@ -76,10 +51,6 @@ class Post
       @id
   end
   
-  def destroy
-    connection.execute("DELETE FROM posts WHERE posts.id = ?", id)
-  end
-  
   def comments
     comments_hash = connection.execute("SELECT * FROM comments WHERE comments.post_id = ?", id)
     comments_hash.map do |comment_hash|
@@ -94,18 +65,6 @@ class Post
   def create_comment(attributes)
     comment = build_comment(attributes)
     comment.save
-  end
-  
-  private
-  
-  def self.connection
-    db_connection = SQLite3::Database.new 'db/development.sqlite3'
-    db_connection.results_as_hash = true
-    db_connection
-  end
-  
-  def connection
-    self.class.connection
   end
   
 end
