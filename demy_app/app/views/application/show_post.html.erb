@@ -31,6 +31,12 @@
             <form method="post" action="/show_post/<%= post.id %>/delete_comment/<%= comment.id %>">
               <input type="submit" value="Delete Comment" />
             </form>
+            
+            <!-- with delete path and form_tag -->
+            <!--<%= form_tag post_comment_path(@post.id, comment.id), method: "delete" do %>-->
+            <!--  <%= submit_tag "Delete Comment" %>-->
+            <!--<% end %>-->
+
           </div>
           <hr />
         <% end %>
@@ -58,6 +64,22 @@
           
           <input type="submit" value="Create Comment" />
         </form>
+        
+        <!-- with form_tag -->
+        <!-- We're using a url helper to post data to the correct action. -->
+        <!--<%#= form_tag post_comments_path(@post.id) do %>-->
+
+        <!--  <%#= label_tag 'Comment' %>-->
+        <!--  <%#= text_area_tag 'body', @comment.body %>-->
+        <!--  <br /> <br />-->
+        
+        <!--  <%#= label_tag 'Name' %>-->
+        <!--  <%#= text_field_tag 'author', @comment.author %>-->
+        <!--  <br /> <br />-->
+        
+        <!--  <%#= submit_tag "Add Comment" %>-->
+        <!--<%# end %>-->
+        
         <hr />
       </div>
       

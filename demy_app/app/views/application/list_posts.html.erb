@@ -17,6 +17,12 @@
           <form method="post" action="/delete_post/<%= post.id %>" style="display:inline">
             <input type="submit" value="Delete" />
           </form>
+          
+          <!-- using form_tag -->
+          <!--<%= form_tag post_path(post.id), method: "delete" , style: "display: inline" do %>-->
+          <!--  <%= submit_tag "Delete" %>-->
+          <!--<% end %>-->
+          
         </div>
         <hr />
       <% end %>

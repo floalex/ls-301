@@ -1,3 +1,5 @@
+**Without Rails Maric**
+
 ### 1. Sending Requests And Responses
 1. Defining A Route
   - Ruby Tips:
@@ -283,3 +285,293 @@ defining a route, action, and view to serve the new post form to the client:
     * give our classes a .table_name method to figure out the appropriate table name string
     * inside of a class method self is the class
   - This process of having an object look at itself is called **introspection**. 
+
+
+** With Rails Convention **
+
+## 1. Routes and Resources
+  - data-centric apps (or CRUDy apps) tend to have very similar ways for letting users interact with the application
+  - REST stands for "Representational State Transfer"
+    * a software architecture style and guideline to create scalable web services
+    * RESTful interfaces center around "nouns" or "resources
+    * remove "verbs" from the interfaces but instead relying on the standardized HTTP verbs (GET/POST/PUT/DELETE)
+  - RESTful interfaces standardized web application interaction patterns to make them easier to understand
+    - streamline your application to align with how the backend data is stored in databases
+    - makes development easier
+  
+  * root: specify what action maps to "/"(the top-level URL of our site which has no path)
+  * match + via: match is used to match URL patterns to one or more routes. 
+  * as: make our URL helpers better match custom URLs
+  * collection route: Match a URL with path `/posts/popular`
+  * passing an extra parameter: via the params hash
+  
+  -  A route interprets an incoming HTTP request and:
+    1. matches a request to a controller action based on HTTP verb and the request URL pattern
+    2. captures data in the URL in `params` for controller actions
+    3. can use the resources macro to generate RESTful routes very quickly
+
+## 2. Conventional Views and Controller Actions
+1. Restful Controller Conventions
+  - RESTful conventions based on resources don't stop with routes
+  - organize all the actions related to the resources in the controller
+    * typical Rails controller will have a subset of RESTful actions of 
+      index, show, new, edit, create, update, and destroy
+  - if you find yourself adding actions such as create_draft, delete_draft, update_draft etc. to 
+    the PostsController, it's a sign that you should think about having a DraftsController with
+    create, delete and update actions
+
+2. Rendering Views With Instance Variables
+- Instance variables are automatically available in view templates
+
+## 3. Controller Action and View File Structure
+  - Rails will automatically look for a view template in directory matches the controller resource's name,
+    with the name that matches the controller action's name
+  - Either explicitly tell Rails what view template to render, or set the response header with a redirect.
+  - RESTful conventions:
+    * list_posts -> list -> index
+    * show_post -> show
+    * new_post -> new
+    * create_post -> create
+    * edit_post -> edit
+    * update_post -> update
+    * delete_post -> delete -> destroy
+
+## 4. Filters and Indifferent Access
+  - private method in controller action will never be routed to
+
+
+## 5. Indifferent Access
+
+## 6. More Controller Options
+1. Status Codes and Request Formats
+  - Set explicit response header status code
+    ```
+    def four_oh_four
+      # specific HTTP status code for the response
+      render plain: '404 Not Found', status: :not_found
+      # Fixnums also work:
+      # render plain: '404 Not Found', status: 404
+    end
+    ```
+  - Respond to multiple request formats
+  ```
+  def greeting
+    # respond differently to different formats...
+    respond_to do |format|
+      # render one response for HTML requests
+      format.html { render inline: "<p>Hi!</p>" }
+      # render another for JSON requests
+      format.json { render json: {greeting: 'Hi!'} }
+    end
+  end
+  ```
+  - Given a /greeting route to this action:
+  ```
+  $ curl localhost:3000/greeting    
+  <p>Hi!</p>
+  $ curl localhost:3000/greeting.html
+  <p>Hi!</p>
+  $ curl localhost:3000/greeting.json
+  {"greeting":"Hi!"}
+  ```
+
+
+## 7. The link_to Helper
+  - link_to is a Rails built in helper that helps generate an anchor tag.
+    It works like this: `<%= link_to 'Link Text', url_or_path %>`
+  - Helpers, or more specifically, view helpers are methods that generate HTML snippets in a view.
+    ```
+    <%= link_to 'Back to Posts', posts_path %>
+
+    <!-- this generates the HTML... -->
+    
+    <a href="/posts">Back to Posts</a>
+    ```
+  
+  - We can actually create similar method ourselves:
+  ```
+  ### app/helpers/application_helper.rb ###: 
+  ### methods defined here will automatically become helpers and can be used in views ###
+
+  module ApplicationHelper
+    def my_link_to(text, href)
+      "<a href='#{href}'>#{text}</a>".html_safe
+    end
+  end
+  ```
+
+## 8. Nonstandard HTTP Verbs
+  - browsers natively only support HTTP GET and POST methods
+  - On the server side, Rails is able to examine the "_method" value in the params to restore 
+    the semantics of the HTTP request.
+  - to use HTTP POST to fake PUT/PATCH/DELETE methods:
+  ```
+  <form method="post" action="/posts/<%= post.id %>" style='display: inline'>
+    <input name= "_method" type="hidden" value="delete">
+    <input type="submit" value="Delete" />
+  </form>
+  ```
+  
+## 9. Form Helpers
+1. CSRF: Cross-Site Request Forgery is a type of attack on an application, it uses 
+   hidden malicious code in one application to attack data in another application
+   Example:
+   ```
+   <a href="http://example.com" name="example" onclick="www.our_app/posts/1/delete">...</a>
+   ```
+   * If such a link was clicked, that html event of onclick would fire off. The value in onclick would 
+     get added to our cookies. If we were still logged into our app when we clicked the above link, then 
+     that cookie would be sent to our application, and verified with our current session id. Clicking the 
+     link above could then delete a post on our application without the user even realizing it.
+
+  - How to prevent CSRF?
+  Answer:
+    Rails prevents such an attack with the use of an `authenticity_token`: a random string stored in our session.
+    Every time a javascript or html based request is made, it is checked for an authenticity token.
+    If the token sent with the request from a form does not match the one stored in application's session, 
+    then an exception will be thrown.
+
+    * set a hidden input element with a name of `authenticity_token` and a value that is set by the 
+      `form_authenticity_token` method, which looks at the token saved in our session and returns it for use
+  
+  - form_tag Helpers:
+  ```
+  label_tag → <label></label>
+    # takes one argument that sets the for attribute, as well as the content for that label
+    
+  text_field_tag → <input type='text'>
+    # first argument of the text field and text area helpers sets the name and id attributes.
+    The second argument sets what the content/value that will be used for that tag
+    
+  submit_tag → <input type='submit'>
+    # takes one argument that sets the value of the submit tag
+  ```
+  
+  - Parameter Naming Conventions and Mass Assignment
+    * Any fields related to our post are in a nested hash
+    ```
+    1] pry(#<PostsController>)> params
+    => {"utf8"=>"✓",
+     "authenticity_token"=>"PSdbhGz0Cb2ic0PO2GwmNs9+3rSxLp0wNAVR6OHvGdIuk/5Icdba7yMuFA93/ssYR15hNyI3NVlwnYd0KQuP4A==",
+     "post"=>{"title"=>"A New Post", "body"=>"Hello World", "author"=>"Alice Cooper"},
+     "commit"=>"Create Post",
+     "controller"=>"posts",
+     "action"=>"create"}
+    ```
+    
+    * mass assignment: is a name for when we use a group of values to update an object
+
+
+# 10. Building Our Own Form Helpers
+  - `my_form_tag`
+    need to be aware of a number of different things:
+    1. the path the <form> should submit to
+    2. the HTTP verb the <form> uses
+    3. the name attribute of each field in the <form>
+    4. populating each field with a value, if needed
+  
+    ```
+    <!-- app/views/posts/show.html.erb -->
+
+    <div class="comments">
+
+      <!-- ... -->
+
+      <%= my_form_tag post_comments_path(@post.id) do %>
+
+        <% unless @comment.new_record? %>
+          <%= my_hidden_field_tag '_method', 'patch' %>
+        <% end %>
+
+        <%= my_label_tag 'Comment' %>
+        <%= my_text_area_tag 'comment[body]', @comment.body %>
+        <br /><br />
+
+        <%= my_label_tag 'Author' %>
+        <%= my_text_field_tag 'comment[author]', @comment.author %>
+        <br /><br />
+
+        <%= my_submit_tag %>
+      <% end %>
+
+    </div>
+    ```
+    
+    * If we were to execute the block normally, like this:
+    ```
+    def my_form_tag(path, &block)
+      attrs  = "method='post' action='#{path}'"
+      fields = block.call # <- calling the block normally
+      "<form #{attrs}> #{my_authenticity_token_field} #{fields} </form>".html_safe
+    end
+    ```
+    will end up with something like this:
+    ```
+    <label>Comment:</label>
+    <textarea name='comment[body]' value=''></textarea>
+    
+    <label>Your Name:</label>
+    <input name='comment[author]' value='' type='text' />
+    
+    <input type='submit' value='Submit'>
+    
+    <!-- ^ Only the authenticity token field makes it into the <form>! -->
+    
+    <form method='post' action='/posts/1/comments'>
+      <input name="authenticity_token" value="" type="hidden">
+    </form>
+    ```
+    This happens because executing the ERB block results in its return being placed immediately into the 
+    output HTML when the call occurs.
+    So the capture implementation will give us a working <form>, to trap the block's return value in a variable,
+    and then place it in the <form> string where it belongs
+
+      
+# 11. Unobtrusive Scripting
+  1. Write a Dynamic Form With link_to
+    Deleting a post or a comment currently needs a form so that we can use the `_method` trick to trigger a DELETE 
+    action. Rails provides a way that we can do this simply with the link_to helper
+  ```
+  <%= link_to 'Delete', post_path(post.id), method: :delete, data: { confirm: "Are you sure want to delete '#{post.title}'?"} %>
+  
+  # render into
+  <a data-confirm="Are you sure want to delete 'post_title_here'?" rel="nofollow" data-method="delete" href="..." >Delete</a>
+  ```
+  
+  - "unobtrusive scripting": Javascript code that facilitates is not intertwined with the markup
+    Rails monitors the data-method and data-confirm data attributes for special processing with a Javascript 
+    library: jquery-rails
+
+  2. Javascript Include Tag and CSRF meta tags
+    `link_to` dynamic form is using Javascript, and when using Javascript to send a form, we will need to include 
+    this csrf meta token
+  
+
+# 12. Render Responsive Views
+  1. Layouts: extract common code that is used for several view templates to one location
+    `yield` identifies where content from our view should be inserted into the enclosing layout. 
+
+  2. Partials
+    - extract common HTML/ERB code that is reused in various view templates to one location
+    - place the common codes in different paths in "shared" and passing obj
+  
+  3. Options for using layout method
+    - In the controller, we may specify a different layout (instead of the default one, application.html.erb) 
+      for our views. It's also possible to set a specific layout for all actions in a controller.
+
+  4. Flash Messages
+    - consider flash as a hash that can store messages which can then be pulled out in the next HTTP request
+
+# 13. Active Record Models
+  1. Models
+    | Model Name    | File Location and Name  | Database Table Name  |
+    | ------------- |:-------------:| -----:|
+    | Post    | app/models/post.rb | posts |
+    | MoutainBike	 | app/models/mountain_bike.rb  | mountain_bikes |
+
+   
+# 14. Active Record
+  - When you have a has_many :comments line in your model, Rails will define a method comments for you, 
+    very similar to the comments method we had before, to retrieve all the comments related to the post.
+  - when you have a belongs_to :post line in your Comment model, Rails will define the method post to 
+    fetch you the post related to that comment.

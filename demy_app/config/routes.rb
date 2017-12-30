@@ -18,4 +18,28 @@ Rails.application.routes.draw do
   post '/show_post/:post_id/delete_comment/:comment_id' => 'application#delete_comment'
   
   get '/list_comments' => 'application#list_comments'
+  
+  
+  ## RESTful
+  
+  ### posts ###
+
+  # get    '/posts'          => 'posts#index'
+  # get    '/posts/:id'      => 'posts#show'
+  # get    '/posts/new'      => 'posts#new'
+  # post   '/posts'   => 'posts#create'
+  # get    '/posts/:id/edit' => 'posts#edit'
+
+  # patch  '/posts/:id'      => 'posts#update'
+  # put    '/posts/:id'      => 'posts#update'
+
+  # delete '/posts/:id'      => 'posts#destroy'
+
+
+  ### comments ###
+
+  # get    '/comments'                    => 'comments#index'
+  # post   '/posts/:post_id/comments'     => 'comments#create'
+  # delete '/posts/:post_id/comments/:id' => 'comments#destroy'
+
 end

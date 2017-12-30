@@ -18,7 +18,8 @@ Live Code: https://flo-postit-app.herokuapp.com/
 
 1. Download the Heroku Toolbelt.
 2. Go to Heroku.com and register.
-3. Issue "heroku login" to authenticate, with the credentials from previous step. Make sure it's a git repository, by issuing "git init", and also "git add", "git commit" your files.
+3. Issue "heroku login" to authenticate, with the credentials from previous step. Make sure it's a git 
+   repository, by issuing "git init", and also "git add", "git commit" your files.
 4. Then "heroku create" to create this app on heroku. This command also adds a "heroku" remote repository that you can push to.
 5. To deploy, issue "git push heroku master".
 6. You may need to run migrations on heroku afterwards, with "heroku run rake db:migrate".
@@ -238,7 +239,7 @@ Live Code: https://flo-postit-app.herokuapp.com/
 * Warning: Make sure the file name, gem name and the `include xxx` in model need to be all matched to make the gem works in the app
   - If don't put "voteable" in front of the file and gem name, Rails couldn't find it in the app
 
-##22. Simple Admin roles
+## 22. Simple Admin roles
   - Build a simple admin role so that only admins can create new categories.
     * Add the authorization roles logic to the User model
     * Modify the users table to add the roles
@@ -246,7 +247,7 @@ Live Code: https://flo-postit-app.herokuapp.com/
   
   - Now that we have roles, implement a rule where only the creator or an admin can edit a post object.
 
-##23. Time Zones
+## 23. Time Zones
   - create a new column to allow users to display all times in the application in the user specified time zone.
     1. Set/overwrite the default time zone in "application.rb"
       - `rake time:zones:all | grep US` will display all the US time zone in terminal
@@ -255,7 +256,7 @@ Live Code: https://flo-postit-app.herokuapp.com/
       * Make sure the whitelist the time zone field in users controller
     4. Use `in_time_zone` to update the time in helper method 
 
-##24. Two factor auth with Twilio(optional)
+## 24. Two factor auth with Twilio(optional)
   Thinking process:
   1. phone column and pin column
   2. Change login logic
@@ -330,13 +331,16 @@ Live Code: https://flo-postit-app.herokuapp.com/
   7. Add the pin template in session view
   8. Install Twilio in the app and require the file
 
-##25. Pagination
+## 25. Pagination
   - Set PER_PAGE setting
   - Change the code in Posts index method
   - pages? - (num of all posts) / (posts per page)
   - page 1 -> offset: 0, shows: 1-3
   - page 2 -> offset: 3, shows: 4-6
 
-##26. Deploy to Heroku
+## 26. Deploy to Heroku
   - Since Heroku needs updated Ruby version to run, need to update Rails version to 4.2 
   - Otherwise, there will be ActiveRecord error for time zone
+  - Note: You can deploy to heroku without saving the Git first, but you still need to run `git init` 
+  - login then create: `heroku create name`
+  - run `git push heroku master`
